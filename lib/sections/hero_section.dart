@@ -3,7 +3,14 @@ import 'package:flutter/material.dart';
 import '../app/app_theme.dart';
 
 class HeroSection extends StatelessWidget {
-  const HeroSection({super.key});
+  final VoidCallback onViewProjectsTap;
+  final VoidCallback onDownloadCvTap;
+
+  const HeroSection({
+    super.key,
+    required this.onViewProjectsTap,
+    required this.onDownloadCvTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +26,19 @@ class HeroSection extends StatelessWidget {
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 1200),
           child: isMobile
-              ? const _HeroContent()
-              : const Row(
+              ? _HeroContent(
+                  onViewProjectsTap: onViewProjectsTap,
+                  onDownloadCvTap: onDownloadCvTap,
+                )
+              : Row(
                   children: [
-                    Expanded(flex: 6, child: _HeroContent()),
+                    Expanded(
+                      flex: 6,
+                      child: _HeroContent(
+                        onViewProjectsTap: onViewProjectsTap,
+                        onDownloadCvTap: onDownloadCvTap,
+                      ),
+                    ),
                     SizedBox(width: 56),
                     Expanded(flex: 4, child: _HeroProfileCard()),
                   ],
@@ -34,7 +50,13 @@ class HeroSection extends StatelessWidget {
 }
 
 class _HeroContent extends StatelessWidget {
-  const _HeroContent();
+  final VoidCallback onViewProjectsTap;
+  final VoidCallback onDownloadCvTap;
+
+  const _HeroContent({
+    required this.onViewProjectsTap,
+    required this.onDownloadCvTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -77,14 +99,14 @@ class _HeroContent extends StatelessWidget {
           runSpacing: 16,
           children: [
             FilledButton(
-              onPressed: () {},
+              onPressed: onViewProjectsTap,
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 18, vertical: 14),
                 child: Text('View Projects'),
               ),
             ),
             OutlinedButton(
-              onPressed: () {},
+              onPressed: onDownloadCvTap,
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 18, vertical: 14),
                 child: Text('Download CV'),

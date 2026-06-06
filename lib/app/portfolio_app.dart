@@ -56,7 +56,15 @@ class _PortfolioHomePageState extends State<PortfolioHomePage> {
             SingleChildScrollView(
               child: Column(
                 children: [
-                  Container(key: heroKey, child: const HeroSection()),
+                  Container(
+                    key: heroKey,
+                    child: HeroSection(
+                      onViewProjectsTap: () => scrollToSection(projectsKey),
+                      onDownloadCvTap: () {
+                        // TODO: Add CV download once resume file is added.
+                      },
+                    ),
+                  ),
                   Container(key: aboutKey, child: const AboutSection()),
                   Container(key: techKey, child: const TechStackSection()),
                   Container(key: projectsKey, child: const ProjectsSection()),
