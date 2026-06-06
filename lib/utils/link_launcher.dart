@@ -24,3 +24,17 @@ Future<void> launchEmail(String email) async {
     debugPrint('Could not launch email client');
   }
 }
+
+Future<void> launchAsset(String assetPath) async {
+  final uri = Uri.parse(assetPath);
+
+  final didLaunch = await launchUrl(
+    uri,
+    mode: LaunchMode.platformDefault,
+    webOnlyWindowName: '_blank',
+  );
+
+  if (!didLaunch) {
+    debugPrint('Could not launch asset: $assetPath');
+  }
+}

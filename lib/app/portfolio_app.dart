@@ -5,6 +5,7 @@ import '../sections/contact_section.dart';
 import '../sections/hero_section.dart';
 import '../sections/projects_section.dart';
 import '../sections/tech_stack_section.dart';
+import '../utils/link_launcher.dart';
 import '../widgets/nav_bar.dart';
 import 'app_theme.dart';
 
@@ -60,9 +61,8 @@ class _PortfolioHomePageState extends State<PortfolioHomePage> {
                     key: heroKey,
                     child: HeroSection(
                       onViewProjectsTap: () => scrollToSection(projectsKey),
-                      onDownloadCvTap: () {
-                        // TODO: Add CV download once resume file is added.
-                      },
+                      onDownloadCvTap: () =>
+                          launchAsset('assets/documents/mahmood_sharif_cv.pdf'),
                     ),
                   ),
                   Container(key: aboutKey, child: const AboutSection()),
