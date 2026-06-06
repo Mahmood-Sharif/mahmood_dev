@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../sections/about_section.dart';
+import '../sections/selected_work_section.dart';
 import '../sections/contact_section.dart';
 import '../sections/hero_section.dart';
 import '../sections/projects_section.dart';
@@ -69,7 +69,10 @@ class _PortfolioHomePageState extends State<PortfolioHomePage> {
                             launchAsset('documents/mahmood_sharif_cv.pdf'),
                       ),
                     ),
-                    Container(key: aboutKey, child: const AboutSection()),
+                    Container(
+                      key: aboutKey,
+                      child: const SelectedWorkSection(),
+                    ),
                     const ExperienceSection(),
                     Container(key: techKey, child: const TechStackSection()),
                     Container(key: projectsKey, child: const ProjectsSection()),

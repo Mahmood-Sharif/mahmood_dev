@@ -68,7 +68,7 @@ class _HeroContent extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
-          'Mahmood Sharif',
+          'Mahmood Sharif · Software Engineer',
           style: TextStyle(
             fontSize: 18,
             color: AppTheme.primary,
@@ -77,9 +77,9 @@ class _HeroContent extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         Text(
-          'Flutter Developer\nfor Product Teams',
+          'I turn business problems into working apps.',
           style: TextStyle(
-            fontSize: isMobile ? 40 : 72,
+            fontSize: isMobile ? 38 : 56,
             height: 1.05,
             fontWeight: FontWeight.w800,
             color: AppTheme.textPrimary,
@@ -88,7 +88,7 @@ class _HeroContent extends StatelessWidget {
         ),
         const SizedBox(height: 24),
         const Text(
-          'I build responsive Flutter applications with clean UI, API integrations, state-aware features, and product logic that solves real business problems.',
+          'I combine business thinking and development to turn messy ideas into simple digital products.',
           style: TextStyle(
             fontSize: 18,
             height: 1.7,
@@ -104,7 +104,7 @@ class _HeroContent extends StatelessWidget {
               onPressed: onViewProjectsTap,
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 18, vertical: 14),
-                child: Text('View Projects'),
+                child: Text('See My Work'),
               ),
             ),
             OutlinedButton(
@@ -115,6 +115,16 @@ class _HeroContent extends StatelessWidget {
               ),
             ),
           ],
+        ),
+        const SizedBox(height: 22),
+        const Text(
+          'Flutter · Dart · Supabase · Go · APIs · Product Thinking',
+          style: TextStyle(
+            color: AppTheme.textMuted,
+            fontSize: 14,
+            height: 1.5,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ],
     );
@@ -140,88 +150,155 @@ class _HeroProfileCard extends StatelessWidget {
           ),
         ],
       ),
-      child: const Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _StatusBadge(),
+        children: const [
+          _HeroIdentity(),
           SizedBox(height: 28),
           Text(
-            'Current Focus',
+            'How I work',
             style: TextStyle(
               fontSize: 16,
               color: AppTheme.textMuted,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w700,
             ),
           ),
-          SizedBox(height: 10),
-          Text(
-            'Building production-minded Flutter apps with clean interfaces, backend-connected flows, and practical product decisions.',
-            style: TextStyle(
-              fontSize: 24,
-              height: 1.35,
-              color: AppTheme.textPrimary,
-              fontWeight: FontWeight.w800,
-            ),
+          SizedBox(height: 16),
+          _BuilderProofItem(
+            number: '01',
+            title: 'Find slow industries',
+            description: 'Manual work, WhatsApp, Excel, outdated systems.',
           ),
-          SizedBox(height: 28),
-          _HeroMetric(label: 'Main Stack', value: 'Flutter / Dart'),
-          _HeroMetric(label: 'Backend', value: 'Supabase / APIs / Go'),
-          _HeroMetric(label: 'Strength', value: 'UI + Product Logic'),
+          _BuilderProofItem(
+            number: '02',
+            title: 'Study proven models',
+            description: 'Research what already works in other markets.',
+          ),
+          _BuilderProofItem(
+            number: '03',
+            title: 'Localize for GCC',
+            description: 'Adapt the idea to Bahrain/GCC behavior and needs.',
+          ),
+          _BuilderProofItem(
+            number: '04',
+            title: 'Build the MVP',
+            description: 'Turn the idea into a simple working product.',
+          ),
+          // SizedBox(height: 28),
+          // _HeroMetric(label: 'Main Stack', value: 'Flutter / Dart'),
+          // _HeroMetric(label: 'Backend', value: 'Supabase / APIs / Go'),
+          // _HeroMetric(label: 'Based in', value: 'Bahrain'),
         ],
       ),
     );
   }
 }
 
-class _StatusBadge extends StatelessWidget {
-  const _StatusBadge();
+class _HeroIdentity extends StatelessWidget {
+  const _HeroIdentity();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Container(
+          width: 72,
+          height: 72,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(color: AppTheme.primary, width: 2),
+            image: const DecorationImage(
+              image: AssetImage('assets/images/mahmood_profile.jpg'),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        const SizedBox(width: 16),
+        const Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Mahmood Sharif',
+                style: TextStyle(
+                  color: AppTheme.textPrimary,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+              SizedBox(height: 4),
+              Text(
+                'Software Engineer · Bahrain',
+                style: TextStyle(
+                  color: AppTheme.textMuted,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _BuilderProofItem extends StatelessWidget {
+  final String number;
+  final String title;
+  final String description;
+
+  const _BuilderProofItem({
+    required this.number,
+    required this.title,
+    required this.description,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: AppTheme.primary.withValues(alpha: 0.12),
-        borderRadius: BorderRadius.circular(999),
-        border: Border.all(color: AppTheme.primary.withValues(alpha: 0.35)),
+        color: AppTheme.background.withValues(alpha: 0.55),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: AppTheme.border),
       ),
-      child: const Text(
-        'Open to Flutter roles',
-        style: TextStyle(color: AppTheme.primary, fontWeight: FontWeight.w700),
-      ),
-    );
-  }
-}
-
-class _HeroMetric extends StatelessWidget {
-  final String label;
-  final String value;
-
-  const _HeroMetric({required this.label, required this.value});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 18),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            width: 100,
-            child: Text(
-              label,
-              style: const TextStyle(
-                color: AppTheme.textMuted,
-                fontWeight: FontWeight.w600,
-              ),
+          Text(
+            number,
+            style: const TextStyle(
+              color: AppTheme.primary,
+              fontSize: 13,
+              fontWeight: FontWeight.w900,
             ),
           ),
+          const SizedBox(width: 14),
           Expanded(
-            child: Text(
-              value,
-              style: const TextStyle(
-                color: AppTheme.textPrimary,
-                fontWeight: FontWeight.w700,
-              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    color: AppTheme.textPrimary,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  description,
+                  style: const TextStyle(
+                    color: AppTheme.textSecondary,
+                    fontSize: 13.5,
+                    height: 1.4,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
             ),
           ),
         ],
@@ -229,3 +306,60 @@ class _HeroMetric extends StatelessWidget {
     );
   }
 }
+
+// class _StatusBadge extends StatelessWidget {
+//   const _StatusBadge();
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+//       decoration: BoxDecoration(
+//         color: AppTheme.primary.withValues(alpha: 0.12),
+//         borderRadius: BorderRadius.circular(999),
+//         border: Border.all(color: AppTheme.primary.withValues(alpha: 0.35)),
+//       ),
+//       child: const Text(
+//         'Open to Flutter roles',
+//         style: TextStyle(color: AppTheme.primary, fontWeight: FontWeight.w700),
+//       ),
+//     );
+//   }
+// }
+
+// class _HeroMetric extends StatelessWidget {
+//   final String label;
+//   final String value;
+
+//   const _HeroMetric({required this.label, required this.value});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: const EdgeInsets.only(top: 18),
+//       child: Row(
+//         children: [
+//           SizedBox(
+//             width: 100,
+//             child: Text(
+//               label,
+//               style: const TextStyle(
+//                 color: AppTheme.textMuted,
+//                 fontWeight: FontWeight.w600,
+//               ),
+//             ),
+//           ),
+//           Expanded(
+//             child: Text(
+//               value,
+//               style: const TextStyle(
+//                 color: AppTheme.textPrimary,
+//                 fontWeight: FontWeight.w700,
+//               ),
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
