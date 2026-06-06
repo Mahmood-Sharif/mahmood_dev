@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../app/app_theme.dart';
 import '../models/project.dart';
 import '../utils/link_launcher.dart';
+import 'hover_card.dart';
 
 class ProjectCard extends StatelessWidget {
   final Project project;
@@ -11,52 +12,55 @@ class ProjectCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(28),
-      decoration: BoxDecoration(
-        color: AppTheme.surface,
-        borderRadius: BorderRadius.circular(28),
-        border: Border.all(color: AppTheme.border),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _ProjectHeader(project: project),
-          const SizedBox(height: 18),
-          Text(
-            project.description,
-            style: const TextStyle(
-              color: AppTheme.textSecondary,
-              fontSize: 15.5,
-              height: 1.6,
+    return HoverCard(
+      borderRadius: BorderRadius.circular(28),
+      child: Container(
+        padding: const EdgeInsets.all(28),
+        decoration: BoxDecoration(
+          color: AppTheme.surface,
+          borderRadius: BorderRadius.circular(28),
+          border: Border.all(color: AppTheme.border),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _ProjectHeader(project: project),
+            const SizedBox(height: 18),
+            Text(
+              project.description,
+              style: const TextStyle(
+                color: AppTheme.textSecondary,
+                fontSize: 15.5,
+                height: 1.6,
+              ),
             ),
-          ),
-          const SizedBox(height: 20),
-          const Text(
-            'Key work',
-            style: TextStyle(
-              color: AppTheme.textPrimary,
-              fontSize: 14,
-              fontWeight: FontWeight.w800,
+            const SizedBox(height: 20),
+            const Text(
+              'Key work',
+              style: TextStyle(
+                color: AppTheme.textPrimary,
+                fontSize: 14,
+                fontWeight: FontWeight.w800,
+              ),
             ),
-          ),
-          const SizedBox(height: 10),
-          ...project.highlights.map(
-            (highlight) => _ProjectHighlight(text: highlight),
-          ),
-          const SizedBox(height: 18),
-          Text(
-            project.techStack,
-            style: const TextStyle(
-              color: AppTheme.primary,
-              fontSize: 14,
-              fontWeight: FontWeight.w700,
-              height: 1.4,
+            const SizedBox(height: 10),
+            ...project.highlights.map(
+              (highlight) => _ProjectHighlight(text: highlight),
             ),
-          ),
-          const SizedBox(height: 18),
-          _ProjectActions(project: project),
-        ],
+            const SizedBox(height: 18),
+            Text(
+              project.techStack,
+              style: const TextStyle(
+                color: AppTheme.primary,
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+                height: 1.4,
+              ),
+            ),
+            const SizedBox(height: 18),
+            _ProjectActions(project: project),
+          ],
+        ),
       ),
     );
   }
