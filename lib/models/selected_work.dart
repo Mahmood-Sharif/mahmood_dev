@@ -6,6 +6,8 @@ class SelectedWork {
   final String role;
   final List<String> tools;
   final String visualLabel;
+  final String ctaLabel;
+  final String? url;
 
   const SelectedWork({
     required this.number,
@@ -15,5 +17,7 @@ class SelectedWork {
     required this.role,
     required this.tools,
     required this.visualLabel,
+    required this.ctaLabel,
+    this.url,
   });
 }

@@ -82,9 +82,8 @@ class _DesktopNavBar extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           _NavItem(label: 'Home', onTap: onHeroTap),
-          _NavItem(label: 'SelectedWork', onTap: onAboutTap),
+          _NavItem(label: 'Work', onTap: onAboutTap),
           _NavItem(label: 'Stack', onTap: onTechTap),
-          _NavItem(label: 'Projects', onTap: onProjectsTap),
           _NavItem(label: 'Contact', onTap: onContactTap),
         ],
       ),
@@ -129,7 +128,7 @@ class _MobileNavButton extends StatelessWidget {
                   },
                 ),
                 _MobileNavItem(
-                  label: 'About',
+                  label: 'Work',
                   onTap: () {
                     Navigator.pop(context);
                     onAboutTap();

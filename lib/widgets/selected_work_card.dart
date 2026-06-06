@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../app/app_theme.dart';
 import '../models/selected_work.dart';
+import '../utils/link_launcher.dart';
 
 class SelectedWorkCard extends StatelessWidget {
   final SelectedWork work;
@@ -97,13 +98,23 @@ class _WorkInfo extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 18),
+        const Text(
+          'MY ROLE',
+          style: TextStyle(
+            color: AppTheme.primary,
+            fontSize: 12,
+            fontWeight: FontWeight.w900,
+            letterSpacing: 1.1,
+          ),
+        ),
+        const SizedBox(height: 8),
         Text(
           work.role,
           style: const TextStyle(
             color: AppTheme.textMuted,
             fontSize: 15,
             height: 1.55,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w700,
           ),
         ),
         const SizedBox(height: 26),
@@ -134,6 +145,8 @@ class _WorkInfo extends StatelessWidget {
               )
               .toList(),
         ),
+        const SizedBox(height: 24),
+        _WorkCta(work: work),
       ],
     );
   }
@@ -228,5 +241,34 @@ class _WorkVisual extends StatelessWidget {
       default:
         return Icons.hub_outlined;
     }
+  }
+}
+
+class _WorkCta extends StatelessWidget {
+  final SelectedWork work;
+
+  const _WorkCta({required this.work});
+
+  @override
+  Widget build(BuildContext context) {
+    final hasUrl = work.url != null;
+
+    return MouseRegion(
+      cursor: hasUrl ? SystemMouseCursors.click : SystemMouseCursors.basic,
+      child: OutlinedButton.icon(
+        onPressed: hasUrl ? () => launchExternalUrl(work.url!) : null,
+        icon: Icon(
+          hasUrl ? Icons.open_in_new : Icons.article_outlined,
+          size: 16,
+        ),
+        label: Text(work.ctaLabel),
+        style: OutlinedButton.styleFrom(
+          foregroundColor: AppTheme.textPrimary,
+          disabledForegroundColor: AppTheme.textMuted,
+          side: BorderSide(color: hasUrl ? AppTheme.primary : AppTheme.border),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        ),
+      ),
+    );
   }
 }

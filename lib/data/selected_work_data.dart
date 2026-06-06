@@ -6,32 +6,33 @@ const selectedWorks = [
     title: 'Jareb',
     category: 'F&B · Rewards · Validation',
     description:
-        'A reward-based discovery platform for cafés and restaurants in Bahrain.',
-    role:
-        'Identified the merchant acquisition problem, shaped the customer journey, and built the validation direction.',
+        'Reward-based café discovery platform built to test verified visits and merchant acquisition.',
+    role: 'Product direction · validation flow · customer journey',
     tools: ['Flutter', 'Supabase', 'Cloudflare', 'Product Strategy'],
     visualLabel: 'DISCOVER · VISIT · CLAIM',
+    ctaLabel: 'Visit live site',
+    url: 'https://jareb.app',
   ),
   SelectedWork(
     number: '02',
     title: 'Academity',
     category: 'Operations · Payments · Automation',
     description:
-        'An academy operations and subscription collection system for recurring payments.',
-    role:
-        'Mapped manual payment workflows, reminder logic, and automation opportunities for academies.',
+        'Academy operations concept for recurring payments, reminders, and customer communication.',
+    role: 'Workflow mapping · payment logic · automation planning',
     tools: ['Flutter', 'APIs', 'Payments', 'WhatsApp Automation'],
     visualLabel: 'REGISTER · REMIND · COLLECT',
+    ctaLabel: 'View case study',
   ),
   SelectedWork(
     number: '03',
     title: 'Social Network',
     category: 'Full-stack · Real-time · Reboot01',
     description:
-        'A full-stack social platform with auth, profiles, posts, followers, notifications, and messaging.',
-    role:
-        'Built backend logic, privacy flows, database structure, and real-time communication behavior.',
+        'Full-stack social platform with auth, profiles, posts, privacy, notifications, and messaging.',
+    role: 'Backend logic · database structure · real-time communication',
     tools: ['Go', 'SQLite', 'WebSockets', 'React'],
     visualLabel: 'AUTH · POSTS · REAL-TIME',
+    ctaLabel: 'View details',
   ),
 ];

@@ -36,7 +36,7 @@ class SelectedWorkSection extends StatelessWidget {
               ),
               const SizedBox(height: 14),
               Text(
-                'Proof that I can turn ideas into products.',
+                'Ideas I turned into products.',
                 style: TextStyle(
                   color: AppTheme.textPrimary,
                   fontSize: isMobile ? 36 : 56,
@@ -47,7 +47,7 @@ class SelectedWorkSection extends StatelessWidget {
               ),
               const SizedBox(height: 18),
               const Text(
-                'A short journey through the products and systems I’ve worked on.',
+                'Scroll through a few products and systems I shaped, built, or validated.',
                 style: TextStyle(
                   color: AppTheme.textSecondary,
                   fontSize: 18,
@@ -69,7 +69,7 @@ class SelectedWorkSection extends StatelessWidget {
                 )
               else
                 SizedBox(
-                  height: 520,
+                  height: 600,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     itemCount: selectedWorks.length,
@@ -82,7 +82,7 @@ class SelectedWorkSection extends StatelessWidget {
               if (!isMobile) ...[
                 const SizedBox(height: 18),
                 const Text(
-                  'Scroll horizontally to explore →',
+                  'Drag or scroll sideways to explore →',
                   style: TextStyle(
                     color: AppTheme.textMuted,
                     fontSize: 14,
