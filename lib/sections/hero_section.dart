@@ -19,12 +19,14 @@ class HeroSection extends StatelessWidget {
     return Container(
       width: double.infinity,
       padding: EdgeInsets.symmetric(
-        horizontal: isMobile ? 24 : 96,
-        vertical: isMobile ? 80 : 130,
+        horizontal: isMobile
+            ? AppTheme.mobileHorizontalPadding
+            : AppTheme.desktopHorizontalPadding,
+        vertical: isMobile ? 96 : 150,
       ),
       child: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1200),
+          constraints: const BoxConstraints(maxWidth: AppTheme.maxContentWidth),
           child: isMobile
               ? _HeroContent(
                   onViewProjectsTap: onViewProjectsTap,
@@ -77,7 +79,7 @@ class _HeroContent extends StatelessWidget {
         Text(
           'Flutter Developer\n& Product Builder',
           style: TextStyle(
-            fontSize: isMobile ? 44 : 72,
+            fontSize: isMobile ? 40 : 72,
             height: 1.05,
             fontWeight: FontWeight.w800,
             color: AppTheme.textPrimary,

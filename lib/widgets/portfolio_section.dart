@@ -21,12 +21,14 @@ class PortfolioSection extends StatelessWidget {
     return Container(
       width: double.infinity,
       padding: EdgeInsets.symmetric(
-        horizontal: isMobile ? 24 : 96,
-        vertical: isMobile ? 56 : 72,
+        horizontal: isMobile
+            ? AppTheme.mobileHorizontalPadding
+            : AppTheme.desktopHorizontalPadding,
+        vertical: isMobile ? 48 : 72,
       ),
       child: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1200),
+          constraints: const BoxConstraints(maxWidth: AppTheme.maxContentWidth),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

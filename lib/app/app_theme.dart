@@ -9,6 +9,10 @@ class AppTheme {
   static const Color textSecondary = Color(0xFFCBD5E1);
   static const Color textMuted = Color(0xFF94A3B8);
 
+  static const double maxContentWidth = 1200;
+  static const double desktopHorizontalPadding = 96;
+  static const double mobileHorizontalPadding = 24;
+
   static ThemeData darkTheme() {
     return ThemeData(
       useMaterial3: true,
