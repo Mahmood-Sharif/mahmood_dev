@@ -12,6 +12,7 @@ const projects = [
       'Built validation website and signup flow',
       'Structured product logic around merchants, users, drops, and rewards',
     ],
+    liveUrl: 'https://jareb.app',
   ),
   Project(
     title: 'Academity',
@@ -24,6 +25,7 @@ const projects = [
       'Worked on payment collection and reminder workflows',
       'Explored Tap Payments and WhatsApp automation integrations',
     ],
+    liveUrl: 'https://github.com/Mahmood-Sharif/Academity_App',
   ),
   Project(
     title: 'Social Network',
@@ -36,6 +38,7 @@ const projects = [
       'Built follow/request/private profile logic',
       'Debugged real-time messaging and notification behavior',
     ],
+    githubUrl: 'https://github.com/YOUR_USERNAME/social-network',
   ),
   Project(
     title: 'Real-Time Forum',
@@ -48,5 +51,6 @@ const projects = [
       'Handled auth, posts, comments, and private messages',
       'Worked with backend routes and frontend state updates',
     ],
+    githubUrl: 'https://github.com/YOUR_USERNAME/real-time-forum',
   ),
 ];

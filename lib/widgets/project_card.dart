@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../app/app_theme.dart';
 import '../models/project.dart';
+import '../utils/link_launcher.dart';
 
 class ProjectCard extends StatelessWidget {
   final Project project;
@@ -54,6 +55,8 @@ class ProjectCard extends StatelessWidget {
               height: 1.4,
             ),
           ),
+          const SizedBox(height: 18),
+          _ProjectActions(project: project),
         ],
       ),
     );
@@ -126,6 +129,78 @@ class _ProjectHighlight extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _ProjectActions extends StatelessWidget {
+  final Project project;
+
+  const _ProjectActions({required this.project});
+
+  @override
+  Widget build(BuildContext context) {
+    final actions = <Widget>[
+      if (project.githubUrl != null)
+        _ProjectActionButton(
+          label: 'GitHub',
+          icon: Icons.code,
+          onTap: () => launchExternalUrl(project.githubUrl!),
+        ),
+      if (project.liveUrl != null)
+        _ProjectActionButton(
+          label: 'Live',
+          icon: Icons.open_in_new,
+          onTap: () => launchExternalUrl(project.liveUrl!),
+        ),
+      if (project.caseStudyUrl != null)
+        _ProjectActionButton(
+          label: 'Case Study',
+          icon: Icons.article_outlined,
+          onTap: () => launchExternalUrl(project.caseStudyUrl!),
+        ),
+    ];
+
+    if (actions.isEmpty) {
+      return const Text(
+        'Case study coming soon',
+        style: TextStyle(
+          color: AppTheme.textMuted,
+          fontSize: 13,
+          fontWeight: FontWeight.w700,
+        ),
+      );
+    }
+
+    return Wrap(spacing: 10, runSpacing: 10, children: actions);
+  }
+}
+
+class _ProjectActionButton extends StatelessWidget {
+  final String label;
+  final IconData icon;
+  final VoidCallback onTap;
+
+  const _ProjectActionButton({
+    required this.label,
+    required this.icon,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: OutlinedButton.icon(
+        onPressed: onTap,
+        icon: Icon(icon, size: 16),
+        label: Text(label),
+        style: OutlinedButton.styleFrom(
+          foregroundColor: AppTheme.textPrimary,
+          side: const BorderSide(color: AppTheme.border),
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+        ),
       ),
     );
   }

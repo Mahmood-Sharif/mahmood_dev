@@ -4,6 +4,9 @@ class Project {
   final String role;
   final String techStack;
   final List<String> highlights;
+  final String? githubUrl;
+  final String? liveUrl;
+  final String? caseStudyUrl;
 
   const Project({
     required this.title,
@@ -11,5 +14,8 @@ class Project {
     required this.role,
     required this.techStack,
     required this.highlights,
+    this.githubUrl,
+    this.liveUrl,
+    this.caseStudyUrl,
   });
 }
