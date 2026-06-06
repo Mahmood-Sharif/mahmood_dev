@@ -6,6 +6,7 @@ import '../sections/hero_section.dart';
 import '../sections/projects_section.dart';
 import '../sections/tech_stack_section.dart';
 import '../sections/experience_section.dart';
+import '../widgets/footer.dart';
 import '../utils/link_launcher.dart';
 import '../widgets/nav_bar.dart';
 import 'app_theme.dart';
@@ -71,6 +72,7 @@ class _PortfolioHomePageState extends State<PortfolioHomePage> {
                   Container(key: techKey, child: const TechStackSection()),
                   Container(key: projectsKey, child: const ProjectsSection()),
                   Container(key: contactKey, child: const ContactSection()),
+                  const PortfolioFooter(),
                 ],
               ),
             ),
