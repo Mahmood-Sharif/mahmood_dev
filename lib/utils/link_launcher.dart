@@ -38,3 +38,17 @@ Future<void> launchAsset(String assetPath) async {
     debugPrint('Could not launch asset: $assetPath');
   }
 }
+
+Future<void> launchWebDocument(String documentPath) async {
+  final uri = Uri.base.resolve(documentPath);
+
+  final didLaunch = await launchUrl(
+    uri,
+    mode: LaunchMode.platformDefault,
+    webOnlyWindowName: '_blank',
+  );
+
+  if (!didLaunch) {
+    debugPrint('Could not launch document: $uri');
+  }
+}

@@ -62,7 +62,7 @@ class _PortfolioHomePageState extends State<PortfolioHomePage> {
                     child: HeroSection(
                       onViewProjectsTap: () => scrollToSection(projectsKey),
                       onDownloadCvTap: () =>
-                          launchAsset('assets/documents/mahmood_sharif_cv.pdf'),
+                          launchAsset('documents/mahmood_sharif_cv.pdf'),
                     ),
                   ),
                   Container(key: aboutKey, child: const AboutSection()),
