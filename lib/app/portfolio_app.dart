@@ -5,6 +5,7 @@ import '../sections/contact_section.dart';
 import '../sections/hero_section.dart';
 import '../sections/projects_section.dart';
 import '../sections/tech_stack_section.dart';
+import '../widgets/nav_bar.dart';
 import 'app_theme.dart';
 
 class PortfolioApp extends StatelessWidget {
@@ -21,23 +22,56 @@ class PortfolioApp extends StatelessWidget {
   }
 }
 
-class PortfolioHomePage extends StatelessWidget {
+class PortfolioHomePage extends StatefulWidget {
   const PortfolioHomePage({super.key});
 
   @override
+  State<PortfolioHomePage> createState() => _PortfolioHomePageState();
+}
+
+class _PortfolioHomePageState extends State<PortfolioHomePage> {
+  final heroKey = GlobalKey();
+  final aboutKey = GlobalKey();
+  final techKey = GlobalKey();
+  final projectsKey = GlobalKey();
+  final contactKey = GlobalKey();
+
+  void scrollToSection(GlobalKey key) {
+    final sectionContext = key.currentContext;
+    if (sectionContext == null) return;
+
+    Scrollable.ensureVisible(
+      sectionContext,
+      duration: const Duration(milliseconds: 650),
+      curve: Curves.easeInOutCubic,
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: SelectionArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              HeroSection(),
-              AboutSection(),
-              TechStackSection(),
-              ProjectsSection(),
-              ContactSection(),
-            ],
-          ),
+        child: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(key: heroKey, child: const HeroSection()),
+                  Container(key: aboutKey, child: const AboutSection()),
+                  Container(key: techKey, child: const TechStackSection()),
+                  Container(key: projectsKey, child: const ProjectsSection()),
+                  Container(key: contactKey, child: const ContactSection()),
+                ],
+              ),
+            ),
+            PortfolioNavBar(
+              onHeroTap: () => scrollToSection(heroKey),
+              onAboutTap: () => scrollToSection(aboutKey),
+              onTechTap: () => scrollToSection(techKey),
+              onProjectsTap: () => scrollToSection(projectsKey),
+              onContactTap: () => scrollToSection(contactKey),
+            ),
+          ],
         ),
       ),
     );
