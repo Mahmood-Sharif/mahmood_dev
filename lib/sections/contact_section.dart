@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../app/app_theme.dart';
 import '../widgets/portfolio_section.dart';
+import '../utils/link_launcher.dart';
 
 class ContactSection extends StatelessWidget {
   const ContactSection({super.key});
@@ -84,18 +85,25 @@ class _ContactLinks extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
-        _ContactLinkCard(label: 'Email', value: 'ma7moodfareed435@gmail.com'),
-        SizedBox(height: 14),
+        _ContactLinkCard(
+          label: 'Email',
+          value: 'ma7moodfareed435@gmail.com',
+          onTap: () => launchEmail('ma7moodfareed435@gmail.com'),
+        ),
+        const SizedBox(height: 14),
         _ContactLinkCard(
           label: 'GitHub',
-          value: 'https://github.com/Mahmood-Sharif',
+          value: 'github.com/Mahmood-Sharif',
+          onTap: () => launchExternalUrl('https://github.com/Mahmood-Sharif'),
         ),
-        SizedBox(height: 14),
+        const SizedBox(height: 14),
         _ContactLinkCard(
           label: 'LinkedIn',
-          value: 'https://www.linkedin.com/in/mahmoodsharif/',
+          value: 'linkedin.com/in/mahmoodsharif/',
+          onTap: () =>
+              launchExternalUrl('https://www.linkedin.com/in/mahmoodsharif/'),
         ),
       ],
     );
@@ -105,41 +113,68 @@ class _ContactLinks extends StatelessWidget {
 class _ContactLinkCard extends StatelessWidget {
   final String label;
   final String value;
+  final VoidCallback onTap;
 
-  const _ContactLinkCard({required this.label, required this.value});
+  const _ContactLinkCard({
+    required this.label,
+    required this.value,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(18),
-      decoration: BoxDecoration(
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: Material(
         color: AppTheme.background,
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: AppTheme.border),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            label,
-            style: const TextStyle(
-              color: AppTheme.textMuted,
-              fontSize: 13,
-              fontWeight: FontWeight.w700,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(18),
+          hoverColor: AppTheme.primary.withValues(alpha: 0.08),
+          child: Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(18),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(18),
+              border: Border.all(color: AppTheme.border),
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        label,
+                        style: const TextStyle(
+                          color: AppTheme.textMuted,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        value,
+                        style: const TextStyle(
+                          color: AppTheme.textPrimary,
+                          fontSize: 15,
+                          height: 1.4,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const Icon(
+                  Icons.open_in_new,
+                  size: 18,
+                  color: AppTheme.primary,
+                ),
+              ],
             ),
           ),
-          const SizedBox(height: 6),
-          Text(
-            value,
-            style: const TextStyle(
-              color: AppTheme.textPrimary,
-              fontSize: 15,
-              height: 1.4,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
