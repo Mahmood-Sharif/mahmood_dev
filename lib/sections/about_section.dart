@@ -10,7 +10,7 @@ class AboutSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return PortfolioSection(
       eyebrow: 'ABOUT',
-      title: 'I build like a developer, but think like an operator.',
+      title: 'I build Flutter apps with product logic, not just screens.',
       child: LayoutBuilder(
         builder: (context, constraints) {
           final isMobile = constraints.maxWidth < 800;
@@ -44,7 +44,7 @@ class _AboutText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Text(
-      'I am a Flutter developer and software engineering learner at Reboot01 Bahrain. I focus on building practical applications with clean interfaces, backend-connected features, and real product logic.\n\nMy background includes startup execution, full-stack projects, and product validation. That means I do not only care about how the screen looks — I care about whether the software solves the actual business problem.',
+      'I am a Flutter developer based in Bahrain, currently building real products while completing software engineering training at Reboot01.\n\nMy focus is building clean, responsive Flutter interfaces connected to real backend logic — authentication, APIs, databases, payments, real-time features, and product flows. I care about writing code that supports the user journey and the business goal behind the feature.',
       style: TextStyle(
         fontSize: 18,
         height: 1.75,
@@ -62,21 +62,21 @@ class _AboutHighlights extends StatelessWidget {
     return const Column(
       children: [
         _HighlightCard(
+          title: 'Flutter-focused',
+          description:
+              'I build responsive Flutter UIs and structure features into reusable widgets and clean sections.',
+        ),
+        SizedBox(height: 14),
+        _HighlightCard(
+          title: 'Backend-aware',
+          description:
+              'I understand APIs, Supabase, Go backends, SQLite, WebSockets, and how frontend flows connect to data.',
+        ),
+        SizedBox(height: 14),
+        _HighlightCard(
           title: 'Product-minded',
           description:
-              'I understand users, business requirements, and why a feature matters.',
-        ),
-        SizedBox(height: 14),
-        _HighlightCard(
-          title: 'Full-stack aware',
-          description:
-              'Comfortable working with APIs, Supabase, Go backends, SQLite, and real-time systems.',
-        ),
-        SizedBox(height: 14),
-        _HighlightCard(
-          title: 'Execution-focused',
-          description:
-              'I care about shipping working products, not just writing code in isolation.',
+              'I think through user journeys, business requirements, and why each feature should exist.',
         ),
       ],
     );

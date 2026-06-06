@@ -7,6 +7,7 @@ import '../sections/projects_section.dart';
 import '../sections/tech_stack_section.dart';
 import '../sections/experience_section.dart';
 import '../widgets/footer.dart';
+import '../widgets/page_background.dart';
 import '../utils/link_launcher.dart';
 import '../widgets/nav_bar.dart';
 import 'app_theme.dart';
@@ -53,37 +54,39 @@ class _PortfolioHomePageState extends State<PortfolioHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SelectionArea(
-        child: Stack(
-          children: [
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    key: heroKey,
-                    child: HeroSection(
-                      onViewProjectsTap: () => scrollToSection(projectsKey),
-                      onDownloadCvTap: () =>
-                          launchAsset('documents/mahmood_sharif_cv.pdf'),
+      body: PageBackground(
+        child: SelectionArea(
+          child: Stack(
+            children: [
+              SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      key: heroKey,
+                      child: HeroSection(
+                        onViewProjectsTap: () => scrollToSection(projectsKey),
+                        onDownloadCvTap: () =>
+                            launchAsset('documents/mahmood_sharif_cv.pdf'),
+                      ),
                     ),
-                  ),
-                  Container(key: aboutKey, child: const AboutSection()),
-                  const ExperienceSection(),
-                  Container(key: techKey, child: const TechStackSection()),
-                  Container(key: projectsKey, child: const ProjectsSection()),
-                  Container(key: contactKey, child: const ContactSection()),
-                  const PortfolioFooter(),
-                ],
+                    Container(key: aboutKey, child: const AboutSection()),
+                    const ExperienceSection(),
+                    Container(key: techKey, child: const TechStackSection()),
+                    Container(key: projectsKey, child: const ProjectsSection()),
+                    Container(key: contactKey, child: const ContactSection()),
+                    const PortfolioFooter(),
+                  ],
+                ),
               ),
-            ),
-            PortfolioNavBar(
-              onHeroTap: () => scrollToSection(heroKey),
-              onAboutTap: () => scrollToSection(aboutKey),
-              onTechTap: () => scrollToSection(techKey),
-              onProjectsTap: () => scrollToSection(projectsKey),
-              onContactTap: () => scrollToSection(contactKey),
-            ),
-          ],
+              PortfolioNavBar(
+                onHeroTap: () => scrollToSection(heroKey),
+                onAboutTap: () => scrollToSection(aboutKey),
+                onTechTap: () => scrollToSection(techKey),
+                onProjectsTap: () => scrollToSection(projectsKey),
+                onContactTap: () => scrollToSection(contactKey),
+              ),
+            ],
+          ),
         ),
       ),
     );

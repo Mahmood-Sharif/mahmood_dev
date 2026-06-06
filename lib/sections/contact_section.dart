@@ -68,7 +68,7 @@ class _ContactCopy extends StatelessWidget {
         ),
         SizedBox(height: 16),
         Text(
-          'I am looking for teams where I can build Flutter apps, work with APIs, improve product flows, and contribute beyond just UI implementation.',
+          'I am looking for Flutter roles where I can build mobile/web app features, connect frontend flows to backend services, and contribute to product decisions with a builder mindset.',
           style: TextStyle(
             color: AppTheme.textSecondary,
             fontSize: 17,

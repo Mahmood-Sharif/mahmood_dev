@@ -77,7 +77,7 @@ class _HeroContent extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         Text(
-          'Flutter Developer\n& Product Builder',
+          'Flutter Developer\nfor Product Teams',
           style: TextStyle(
             fontSize: isMobile ? 40 : 72,
             height: 1.05,
@@ -88,7 +88,7 @@ class _HeroContent extends StatelessWidget {
         ),
         const SizedBox(height: 24),
         const Text(
-          'I build product-focused Flutter applications with clean UI, real business logic, API integrations, and a strong understanding of how software solves business problems.',
+          'I build responsive Flutter applications with clean UI, API integrations, state-aware features, and product logic that solves real business problems.',
           style: TextStyle(
             fontSize: 18,
             height: 1.7,
@@ -155,7 +155,7 @@ class _HeroProfileCard extends StatelessWidget {
           ),
           SizedBox(height: 10),
           Text(
-            'Building Flutter apps that connect product, design, backend logic, and real business needs.',
+            'Building production-minded Flutter apps with clean interfaces, backend-connected flows, and practical product decisions.',
             style: TextStyle(
               fontSize: 24,
               height: 1.35,
@@ -165,8 +165,8 @@ class _HeroProfileCard extends StatelessWidget {
           ),
           SizedBox(height: 28),
           _HeroMetric(label: 'Main Stack', value: 'Flutter / Dart'),
-          _HeroMetric(label: 'Location', value: 'Bahrain'),
-          _HeroMetric(label: 'Strength', value: 'Product + Engineering'),
+          _HeroMetric(label: 'Backend', value: 'Supabase / APIs / Go'),
+          _HeroMetric(label: 'Strength', value: 'UI + Product Logic'),
         ],
       ),
     );
