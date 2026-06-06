@@ -5,10 +5,19 @@ import '../models/project.dart';
 import '../utils/link_launcher.dart';
 import 'hover_card.dart';
 
-class ProjectCard extends StatelessWidget {
+class ProjectCard extends StatefulWidget {
   final Project project;
 
   const ProjectCard({super.key, required this.project});
+
+  @override
+  State<ProjectCard> createState() => _ProjectCardState();
+}
+
+class _ProjectCardState extends State<ProjectCard> {
+  bool isExpanded = false;
+
+  Project get project => widget.project;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +56,27 @@ class ProjectCard extends StatelessWidget {
             ...project.highlights.map(
               (highlight) => _ProjectHighlight(text: highlight),
             ),
-            const SizedBox(height: 18),
+            const SizedBox(height: 12),
+            TextButton.icon(
+              onPressed: () {
+                setState(() {
+                  isExpanded = !isExpanded;
+                });
+              },
+              icon: Icon(
+                isExpanded ? Icons.expand_less : Icons.expand_more,
+                size: 18,
+              ),
+              label: Text(isExpanded ? 'Hide details' : 'View details'),
+            ),
+            AnimatedCrossFade(
+              firstChild: const SizedBox.shrink(),
+              secondChild: _ProjectDetails(project: project),
+              crossFadeState: isExpanded
+                  ? CrossFadeState.showSecond
+                  : CrossFadeState.showFirst,
+              duration: const Duration(milliseconds: 220),
+            ),
             Text(
               project.techStack,
               style: const TextStyle(
@@ -204,6 +233,61 @@ class _ProjectActionButton extends StatelessWidget {
           side: const BorderSide(color: AppTheme.border),
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
         ),
+      ),
+    );
+  }
+}
+
+class _ProjectDetails extends StatelessWidget {
+  final Project project;
+
+  const _ProjectDetails({required this.project});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.only(top: 12, bottom: 8),
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: AppTheme.background,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: AppTheme.border),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Technical details',
+            style: TextStyle(
+              color: AppTheme.textPrimary,
+              fontSize: 14,
+              fontWeight: FontWeight.w900,
+            ),
+          ),
+          const SizedBox(height: 10),
+          ...project.technicalDetails.map(
+            (detail) => _ProjectHighlight(text: detail),
+          ),
+          const SizedBox(height: 12),
+          const Text(
+            'Outcome',
+            style: TextStyle(
+              color: AppTheme.textPrimary,
+              fontSize: 14,
+              fontWeight: FontWeight.w900,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            project.outcome,
+            style: const TextStyle(
+              color: AppTheme.textSecondary,
+              fontSize: 14,
+              height: 1.5,
+            ),
+          ),
+        ],
       ),
     );
   }

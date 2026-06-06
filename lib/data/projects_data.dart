@@ -12,7 +12,14 @@ const projects = [
       'Built validation website and signup flow',
       'Structured product logic around merchants, users, drops, and rewards',
     ],
+    outcome:
+        'Built a realistic validation path for testing demand before investing in a full merchant dashboard or payment-heavy system.',
     liveUrl: 'https://jareb.app',
+    technicalDetails: [
+      'Structured the product around users, merchants, drops, claims, and reward validation',
+      'Planned backend data flow using Supabase for early validation',
+      'Designed the MVP around manual verification before full automation',
+    ],
   ),
   Project(
     title: 'Academity',
@@ -25,7 +32,14 @@ const projects = [
       'Worked on payment collection and reminder workflows',
       'Explored Tap Payments and WhatsApp automation integrations',
     ],
+    outcome:
+        'Learned how to translate messy business operations into product flows, technical requirements, and automation opportunities.',
     liveUrl: 'https://github.com/Mahmood-Sharif/Academity_App',
+    technicalDetails: [
+      'Mapped academy subscription workflows from customer registration to payment reminders',
+      'Explored Tap Payments integration for recurring payment collection',
+      'Planned WhatsApp automation flows for customer communication',
+    ],
   ),
   Project(
     title: 'Social Network',
@@ -38,7 +52,14 @@ const projects = [
       'Built follow/request/private profile logic',
       'Debugged real-time messaging and notification behavior',
     ],
+    outcome:
+        'Built stronger understanding of full-stack app behavior, real-time features, privacy rules, and frontend/backend state synchronization.',
     githubUrl: 'https://github.com/YOUR_USERNAME/social-network',
+    technicalDetails: [
+      'Implemented authentication, profile visibility, and follow/request logic',
+      'Worked with REST routes, SQLite migrations, and backend validation',
+      'Debugged WebSocket messaging and notification behavior between users',
+    ],
   ),
   Project(
     title: 'Real-Time Forum',
@@ -51,6 +72,13 @@ const projects = [
       'Handled auth, posts, comments, and private messages',
       'Worked with backend routes and frontend state updates',
     ],
+    outcome:
+        'Improved my ability to debug live app behavior and understand how real-time communication changes user experience.',
     githubUrl: 'https://github.com/YOUR_USERNAME/real-time-forum',
+    technicalDetails: [
+      'Built private messaging using WebSockets',
+      'Handled posts, comments, sessions, notifications, and typing indicators',
+      'Connected backend events to frontend state updates',
+    ],
   ),
 ];
