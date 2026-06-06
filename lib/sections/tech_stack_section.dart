@@ -17,19 +17,28 @@ class TechStackSection extends StatelessWidget {
           final isMobile = constraints.maxWidth < 700;
           final isTablet = constraints.maxWidth < 1000;
 
+          if (isMobile) {
+            return Column(
+              children: skills
+                  .map(
+                    (skill) => Padding(
+                      padding: const EdgeInsets.only(bottom: 14),
+                      child: SkillCard(skill: skill),
+                    ),
+                  )
+                  .toList(),
+            );
+          }
+
           return GridView.builder(
             itemCount: skills.length,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: isMobile
-                  ? 1
-                  : isTablet
-                  ? 2
-                  : 4,
+              crossAxisCount: isTablet ? 2 : 4,
               crossAxisSpacing: 16,
               mainAxisSpacing: 16,
-              childAspectRatio: isMobile ? 3.2 : 1.7,
+              childAspectRatio: 1.7,
             ),
             itemBuilder: (context, index) {
               return SkillCard(skill: skills[index]);

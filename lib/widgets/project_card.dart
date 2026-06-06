@@ -44,7 +44,6 @@ class ProjectCard extends StatelessWidget {
           ...project.highlights.map(
             (highlight) => _ProjectHighlight(text: highlight),
           ),
-          const Spacer(),
           const SizedBox(height: 18),
           Text(
             project.techStack,
