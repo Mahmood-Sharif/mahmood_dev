@@ -14,7 +14,7 @@ class SelectedWorkCard extends StatelessWidget {
     final isMobile = MediaQuery.sizeOf(context).width < 800;
 
     return Container(
-      width: isMobile ? double.infinity : 760,
+      width: isMobile ? double.infinity : 860,
       padding: EdgeInsets.all(isMobile ? 24 : 34),
       decoration: BoxDecoration(
         color: AppTheme.surface,
@@ -38,6 +38,7 @@ class SelectedWorkCard extends StatelessWidget {
               ],
             )
           : Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(flex: 5, child: _WorkInfo(work: work)),
                 const SizedBox(width: 34),

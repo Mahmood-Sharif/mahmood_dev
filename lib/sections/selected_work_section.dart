@@ -4,8 +4,58 @@ import '../app/app_theme.dart';
 import '../data/selected_work_data.dart';
 import '../widgets/selected_work_card.dart';
 
-class SelectedWorkSection extends StatelessWidget {
+class SelectedWorkSection extends StatefulWidget {
   const SelectedWorkSection({super.key});
+
+  @override
+  State<SelectedWorkSection> createState() => _SelectedWorkSectionState();
+}
+
+class _SelectedWorkSectionState extends State<SelectedWorkSection> {
+  final ScrollController _scrollController = ScrollController();
+
+  bool _canScrollLeft = false;
+  bool _canScrollRight = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_updateScrollButtons);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(_updateScrollButtons);
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _updateScrollButtons() {
+    if (!_scrollController.hasClients) return;
+
+    final position = _scrollController.position;
+
+    setState(() {
+      _canScrollLeft = position.pixels > position.minScrollExtent + 8;
+      _canScrollRight = position.pixels < position.maxScrollExtent - 8;
+    });
+  }
+
+  void _scrollWorkCards(double offset) {
+    if (!_scrollController.hasClients) return;
+
+    final position = _scrollController.position;
+    final target = (_scrollController.offset + offset).clamp(
+      position.minScrollExtent,
+      position.maxScrollExtent,
+    );
+
+    _scrollController.animateTo(
+      target,
+      duration: const Duration(milliseconds: 420),
+      curve: Curves.easeOutCubic,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,19 +85,16 @@ class SelectedWorkSection extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 14),
-              Text(
-                'Ideas I turned into products.',
-                style: TextStyle(
-                  color: AppTheme.textPrimary,
-                  fontSize: isMobile ? 36 : 56,
-                  height: 1.05,
-                  fontWeight: FontWeight.w900,
-                  letterSpacing: -1.2,
-                ),
+              _SelectedWorkHeader(
+                isMobile: isMobile,
+                onPreviousTap: () => _scrollWorkCards(-884),
+                onNextTap: () => _scrollWorkCards(884),
+                canScrollLeft: _canScrollLeft,
+                canScrollRight: _canScrollRight,
               ),
               const SizedBox(height: 18),
               const Text(
-                'Scroll through a few products and systems I shaped, built, or validated.',
+                'A few products I shaped, built, or validated.',
                 style: TextStyle(
                   color: AppTheme.textSecondary,
                   fontSize: 18,
@@ -69,9 +116,11 @@ class SelectedWorkSection extends StatelessWidget {
                 )
               else
                 SizedBox(
-                  height: 600,
+                  height: 520,
                   child: ListView.separated(
+                    controller: _scrollController,
                     scrollDirection: Axis.horizontal,
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: selectedWorks.length,
                     separatorBuilder: (_, _) => const SizedBox(width: 24),
                     itemBuilder: (context, index) {
@@ -79,18 +128,118 @@ class SelectedWorkSection extends StatelessWidget {
                     },
                   ),
                 ),
-              if (!isMobile) ...[
-                const SizedBox(height: 18),
-                const Text(
-                  'Drag or scroll sideways to explore →',
-                  style: TextStyle(
-                    color: AppTheme.textMuted,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ],
             ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _SelectedWorkHeader extends StatelessWidget {
+  final bool isMobile;
+  final VoidCallback onPreviousTap;
+  final VoidCallback onNextTap;
+  final bool canScrollLeft;
+  final bool canScrollRight;
+
+  const _SelectedWorkHeader({
+    required this.isMobile,
+    required this.onPreviousTap,
+    required this.onNextTap,
+    required this.canScrollLeft,
+    required this.canScrollRight,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (isMobile) {
+      return const Text(
+        'Ideas I turned into products.',
+        style: TextStyle(
+          color: AppTheme.textPrimary,
+          fontSize: 36,
+          height: 1.05,
+          fontWeight: FontWeight.w900,
+          letterSpacing: -1.2,
+        ),
+      );
+    }
+
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        const Expanded(
+          child: Text(
+            'Ideas I turned into products.',
+            style: TextStyle(
+              color: AppTheme.textPrimary,
+              fontSize: 56,
+              height: 1.05,
+              fontWeight: FontWeight.w900,
+              letterSpacing: -1.2,
+            ),
+          ),
+        ),
+        const SizedBox(width: 24),
+        Row(
+          children: [
+            _ArrowButton(
+              icon: Icons.arrow_back,
+              onTap: onPreviousTap,
+              isEnabled: canScrollLeft,
+            ),
+            const SizedBox(width: 12),
+            _ArrowButton(
+              icon: Icons.arrow_forward,
+              onTap: onNextTap,
+              isEnabled: canScrollRight,
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _ArrowButton extends StatelessWidget {
+  final IconData icon;
+  final VoidCallback onTap;
+  final bool isEnabled;
+
+  const _ArrowButton({
+    required this.icon,
+    required this.onTap,
+    required this.isEnabled,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      cursor: isEnabled ? SystemMouseCursors.click : SystemMouseCursors.basic,
+      child: Material(
+        color: isEnabled
+            ? AppTheme.surface
+            : AppTheme.surface.withValues(alpha: 0.45),
+        borderRadius: BorderRadius.circular(999),
+        child: InkWell(
+          onTap: isEnabled ? onTap : null,
+          borderRadius: BorderRadius.circular(999),
+          child: Container(
+            width: 52,
+            height: 52,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: isEnabled
+                    ? AppTheme.primary.withValues(alpha: 0.75)
+                    : AppTheme.border,
+              ),
+            ),
+            child: Icon(
+              icon,
+              color: isEnabled ? AppTheme.primary : AppTheme.textMuted,
+            ),
           ),
         ),
       ),
