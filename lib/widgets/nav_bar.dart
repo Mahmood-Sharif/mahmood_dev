@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 import '../app/app_theme.dart';
@@ -20,45 +22,52 @@ class PortfolioNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isMobile = MediaQuery.sizeOf(context).width < 800;
+    final isMobile = MediaQuery.sizeOf(context).width < 820;
 
     return Positioned(
       top: 0,
       left: 0,
       right: 0,
-      child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: isMobile
-              ? AppTheme.mobileHorizontalPadding
-              : AppTheme.desktopHorizontalPadding,
-          vertical: 18,
-        ),
-        decoration: BoxDecoration(
-          color: AppTheme.background.withValues(alpha: 0.72),
-          border: Border(
-            bottom: BorderSide(color: AppTheme.border.withValues(alpha: 0.45)),
-          ),
-        ),
-        child: Center(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(
-              maxWidth: AppTheme.maxContentWidth,
+      child: ClipRect(
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
+          child: Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: isMobile
+                  ? AppTheme.mobileHorizontalPadding
+                  : AppTheme.desktopHorizontalPadding,
+              vertical: 16,
             ),
-            child: isMobile
-                ? _MobileNavButton(
-                    onHeroTap: onHeroTap,
-                    onAboutTap: onAboutTap,
-                    onTechTap: onTechTap,
-                    onProjectsTap: onProjectsTap,
-                    onContactTap: onContactTap,
-                  )
-                : _DesktopNavBar(
-                    onHeroTap: onHeroTap,
-                    onAboutTap: onAboutTap,
-                    onTechTap: onTechTap,
-                    onProjectsTap: onProjectsTap,
-                    onContactTap: onContactTap,
-                  ),
+            decoration: BoxDecoration(
+              color: AppTheme.background.withValues(alpha: 0.78),
+              border: Border(
+                bottom: BorderSide(
+                  color: AppTheme.border.withValues(alpha: 0.65),
+                ),
+              ),
+            ),
+            child: Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(
+                  maxWidth: AppTheme.maxContentWidth,
+                ),
+                child: isMobile
+                    ? _MobileNavButton(
+                        onHeroTap: onHeroTap,
+                        onAboutTap: onAboutTap,
+                        onTechTap: onTechTap,
+                        onProjectsTap: onProjectsTap,
+                        onContactTap: onContactTap,
+                      )
+                    : _DesktopNavBar(
+                        onHeroTap: onHeroTap,
+                        onAboutTap: onAboutTap,
+                        onTechTap: onTechTap,
+                        onProjectsTap: onProjectsTap,
+                        onContactTap: onContactTap,
+                      ),
+              ),
+            ),
           ),
         ),
       ),
@@ -95,14 +104,13 @@ class _DesktopNavBar extends StatelessWidget {
                 color: AppTheme.textPrimary,
                 fontSize: 16,
                 fontWeight: FontWeight.w900,
-                letterSpacing: -0.2,
               ),
             ),
           ),
         ),
         const SizedBox(width: 10),
         const Text(
-          'Product-minded Developer',
+          'Flutter - Product - Operations',
           style: TextStyle(
             color: AppTheme.textMuted,
             fontSize: 14,
@@ -140,7 +148,9 @@ class _MobileNavButton extends StatelessWidget {
       context: context,
       backgroundColor: AppTheme.surface,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(AppTheme.cardRadius),
+        ),
       ),
       builder: (context) {
         return SafeArea(
@@ -206,15 +216,15 @@ class _MobileNavButton extends StatelessWidget {
         ),
         const Spacer(),
         Material(
-          color: AppTheme.surface,
-          borderRadius: BorderRadius.circular(999),
+          color: AppTheme.surfaceElevated,
+          borderRadius: BorderRadius.circular(AppTheme.cardRadius),
           child: InkWell(
             onTap: () => _openMenu(context),
-            borderRadius: BorderRadius.circular(999),
+            borderRadius: BorderRadius.circular(AppTheme.cardRadius),
             child: Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(999),
+                borderRadius: BorderRadius.circular(AppTheme.cardRadius),
                 border: Border.all(color: AppTheme.border),
               ),
               child: const Icon(Icons.menu, color: AppTheme.textPrimary),

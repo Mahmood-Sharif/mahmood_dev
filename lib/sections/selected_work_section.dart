@@ -67,7 +67,7 @@ class _SelectedWorkSectionState extends State<SelectedWorkSection> {
         horizontal: isMobile
             ? AppTheme.mobileHorizontalPadding
             : AppTheme.desktopHorizontalPadding,
-        vertical: isMobile ? 64 : 92,
+        vertical: isMobile ? 62 : 94,
       ),
       child: Center(
         child: ConstrainedBox(
@@ -75,31 +75,26 @@ class _SelectedWorkSectionState extends State<SelectedWorkSection> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'SELECTED WORK',
-                style: TextStyle(
-                  color: AppTheme.primary,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w900,
-                  letterSpacing: 1.4,
-                ),
-              ),
-              const SizedBox(height: 14),
+              const _SectionEyebrow(text: 'SELECTED WORK'),
+              const SizedBox(height: 12),
               _SelectedWorkHeader(
                 isMobile: isMobile,
-                onPreviousTap: () => _scrollWorkCards(-884),
-                onNextTap: () => _scrollWorkCards(884),
+                onPreviousTap: () => _scrollWorkCards(-984),
+                onNextTap: () => _scrollWorkCards(984),
                 canScrollLeft: _canScrollLeft,
                 canScrollRight: _canScrollRight,
               ),
               const SizedBox(height: 18),
-              const Text(
-                'A few products I shaped, built, or validated.',
-                style: TextStyle(
-                  color: AppTheme.textSecondary,
-                  fontSize: 18,
-                  height: 1.6,
-                  fontWeight: FontWeight.w600,
+              const SizedBox(
+                width: 720,
+                child: Text(
+                  'The proof I would look for as a CTO: product judgment, ownership, execution, and a clear reason each thing exists.',
+                  style: TextStyle(
+                    color: AppTheme.textSecondary,
+                    fontSize: 18,
+                    height: 1.6,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
               const SizedBox(height: 42),
@@ -116,7 +111,7 @@ class _SelectedWorkSectionState extends State<SelectedWorkSection> {
                 )
               else
                 SizedBox(
-                  height: 520,
+                  height: 584,
                   child: ListView.separated(
                     controller: _scrollController,
                     scrollDirection: Axis.horizontal,
@@ -155,13 +150,12 @@ class _SelectedWorkHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     if (isMobile) {
       return const Text(
-        'Ideas I turned into products.',
+        'Ideas turned into working products.',
         style: TextStyle(
           color: AppTheme.textPrimary,
           fontSize: 36,
           height: 1.05,
           fontWeight: FontWeight.w900,
-          letterSpacing: -1.2,
         ),
       );
     }
@@ -171,13 +165,12 @@ class _SelectedWorkHeader extends StatelessWidget {
       children: [
         const Expanded(
           child: Text(
-            'Ideas I turned into products.',
+            'Ideas turned into working products.',
             style: TextStyle(
               color: AppTheme.textPrimary,
               fontSize: 56,
               height: 1.05,
               fontWeight: FontWeight.w900,
-              letterSpacing: -1.2,
             ),
           ),
         ),
@@ -219,17 +212,17 @@ class _ArrowButton extends StatelessWidget {
       cursor: isEnabled ? SystemMouseCursors.click : SystemMouseCursors.basic,
       child: Material(
         color: isEnabled
-            ? AppTheme.surface
+            ? AppTheme.surfaceElevated
             : AppTheme.surface.withValues(alpha: 0.45),
-        borderRadius: BorderRadius.circular(999),
+        borderRadius: BorderRadius.circular(AppTheme.cardRadius),
         child: InkWell(
           onTap: isEnabled ? onTap : null,
-          borderRadius: BorderRadius.circular(999),
+          borderRadius: BorderRadius.circular(AppTheme.cardRadius),
           child: Container(
             width: 52,
             height: 52,
             decoration: BoxDecoration(
-              shape: BoxShape.circle,
+              borderRadius: BorderRadius.circular(AppTheme.cardRadius),
               border: Border.all(
                 color: isEnabled
                     ? AppTheme.primary.withValues(alpha: 0.75)
@@ -242,6 +235,24 @@ class _ArrowButton extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _SectionEyebrow extends StatelessWidget {
+  final String text;
+
+  const _SectionEyebrow({required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: const TextStyle(
+        color: AppTheme.primary,
+        fontSize: 13,
+        fontWeight: FontWeight.w900,
       ),
     );
   }

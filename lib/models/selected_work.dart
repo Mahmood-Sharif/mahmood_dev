@@ -3,6 +3,7 @@ class SelectedWork {
   final String title;
   final String category;
   final String description;
+  final String outcome;
   final String role;
   final List<String> tools;
   final String visualLabel;
@@ -15,6 +16,7 @@ class SelectedWork {
     required this.title,
     required this.category,
     required this.description,
+    required this.outcome,
     required this.role,
     required this.tools,
     required this.visualLabel,

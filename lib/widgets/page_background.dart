@@ -11,56 +11,65 @@ class PageBackground extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        const ColoredBox(color: AppTheme.background, child: SizedBox.expand()),
-        Positioned(
-          top: -120,
-          right: -120,
-          child: _GlowOrb(size: 360, color: AppTheme.primary, opacity: 0.14),
+        const DecoratedBox(
+          decoration: BoxDecoration(
+            color: AppTheme.background,
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Color(0xFF12100F),
+                AppTheme.background,
+                Color(0xFF11151A),
+              ],
+            ),
+          ),
+          child: SizedBox.expand(),
         ),
-        Positioned(
-          top: 520,
-          left: -180,
-          child: _GlowOrb(size: 420, color: Color(0xFF6366F1), opacity: 0.10),
-        ),
-        Positioned(
-          bottom: -160,
-          right: -160,
-          child: _GlowOrb(size: 420, color: Color(0xFF14B8A6), opacity: 0.08),
-        ),
+        Positioned.fill(child: CustomPaint(painter: _EditorialGridPainter())),
         child,
       ],
     );
   }
 }
 
-class _GlowOrb extends StatelessWidget {
-  final double size;
-  final Color color;
-  final double opacity;
-
-  const _GlowOrb({
-    required this.size,
-    required this.color,
-    required this.opacity,
-  });
+class _EditorialGridPainter extends CustomPainter {
+  const _EditorialGridPainter();
 
   @override
-  Widget build(BuildContext context) {
-    return IgnorePointer(
-      child: Container(
-        width: size,
-        height: size,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: color.withValues(alpha: opacity),
-              blurRadius: size / 2,
-              spreadRadius: size / 8,
-            ),
-          ],
-        ),
-      ),
+  void paint(Canvas canvas, Size size) {
+    final gridPaint = Paint()
+      ..color = Colors.white.withValues(alpha: 0.035)
+      ..strokeWidth = 1;
+    const spacing = 56.0;
+
+    for (double x = 0; x < size.width; x += spacing) {
+      canvas.drawLine(Offset(x, 0), Offset(x, size.height), gridPaint);
+    }
+
+    for (double y = 0; y < size.height; y += spacing) {
+      canvas.drawLine(Offset(0, y), Offset(size.width, y), gridPaint);
+    }
+
+    final accentPaint = Paint()
+      ..color = AppTheme.accent.withValues(alpha: 0.16)
+      ..strokeWidth = 2;
+    canvas.drawLine(
+      Offset(size.width * 0.08, 0),
+      Offset(size.width * 0.48, size.height),
+      accentPaint,
+    );
+
+    final primaryPaint = Paint()
+      ..color = AppTheme.primary.withValues(alpha: 0.10)
+      ..strokeWidth = 2;
+    canvas.drawLine(
+      Offset(size.width * 0.98, 0),
+      Offset(size.width * 0.62, size.height),
+      primaryPaint,
     );
   }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

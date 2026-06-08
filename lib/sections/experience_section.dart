@@ -25,34 +25,28 @@ class ExperienceSection extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'EXPERIENCE',
-                style: TextStyle(
-                  color: AppTheme.primary,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w900,
-                  letterSpacing: 1.4,
-                ),
-              ),
+              const _SectionEyebrow(text: 'EXPERIENCE'),
               const SizedBox(height: 14),
               Text(
-                'From learning code\nto building products.',
+                'The builder arc.',
                 style: TextStyle(
                   color: AppTheme.textPrimary,
                   fontSize: isMobile ? 38 : 64,
                   height: 1.02,
                   fontWeight: FontWeight.w900,
-                  letterSpacing: -1.4,
                 ),
               ),
               const SizedBox(height: 18),
-              const Text(
-                'The path that shaped how I think, build, and solve business problems.',
-                style: TextStyle(
-                  color: AppTheme.textSecondary,
-                  fontSize: 18,
-                  height: 1.6,
-                  fontWeight: FontWeight.w600,
+              const SizedBox(
+                width: 720,
+                child: Text(
+                  'A practical path from technical foundation to shipped systems, business workflows, and product validation.',
+                  style: TextStyle(
+                    color: AppTheme.textSecondary,
+                    fontSize: 18,
+                    height: 1.6,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
               SizedBox(height: isMobile ? 44 : 76),
@@ -175,7 +169,6 @@ class _YearNode extends StatelessWidget {
               fontSize: isHighlighted ? 58 : 52,
               height: 1,
               fontWeight: FontWeight.w900,
-              letterSpacing: -1.5,
             ),
           ),
           const SizedBox(height: 18),
@@ -228,8 +221,8 @@ class _ExperienceStageCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: isHighlighted
             ? AppTheme.primary.withValues(alpha: 0.10)
-            : AppTheme.surface,
-        borderRadius: BorderRadius.circular(30),
+            : AppTheme.surface.withValues(alpha: 0.92),
+        borderRadius: BorderRadius.circular(AppTheme.cardRadius),
         border: Border.all(
           color: isHighlighted
               ? AppTheme.primary.withValues(alpha: 0.55)
@@ -255,7 +248,6 @@ class _ExperienceStageCard extends StatelessWidget {
               fontSize: 32,
               height: 1.05,
               fontWeight: FontWeight.w900,
-              letterSpacing: -0.8,
             ),
           ),
         ],
@@ -279,7 +271,7 @@ class _ExperienceDetailCard extends StatelessWidget {
       padding: const EdgeInsets.all(30),
       decoration: BoxDecoration(
         color: AppTheme.surface.withValues(alpha: isHighlighted ? 1 : 0.82),
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: BorderRadius.circular(AppTheme.cardRadius),
         border: Border.all(
           color: isHighlighted
               ? AppTheme.primary.withValues(alpha: 0.45)
@@ -320,7 +312,7 @@ class _ExperienceDetailCard extends StatelessWidget {
                   ),
                   decoration: BoxDecoration(
                     color: AppTheme.background,
-                    borderRadius: BorderRadius.circular(999),
+                    borderRadius: BorderRadius.circular(AppTheme.cardRadius),
                     border: Border.all(color: AppTheme.border),
                   ),
                   child: Text(
@@ -423,7 +415,7 @@ class _MobileTimelineCard extends StatelessWidget {
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: AppTheme.surface,
-        borderRadius: BorderRadius.circular(26),
+        borderRadius: BorderRadius.circular(AppTheme.cardRadius),
         border: Border.all(
           color: isHighlighted
               ? AppTheme.primary.withValues(alpha: 0.5)
@@ -483,7 +475,7 @@ class _MobileTimelineCard extends StatelessWidget {
                   ),
                   decoration: BoxDecoration(
                     color: AppTheme.background,
-                    borderRadius: BorderRadius.circular(999),
+                    borderRadius: BorderRadius.circular(AppTheme.cardRadius),
                     border: Border.all(color: AppTheme.border),
                   ),
                   child: Text(
@@ -498,6 +490,24 @@ class _MobileTimelineCard extends StatelessWidget {
             ],
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _SectionEyebrow extends StatelessWidget {
+  final String text;
+
+  const _SectionEyebrow({required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: const TextStyle(
+        color: AppTheme.primary,
+        fontSize: 13,
+        fontWeight: FontWeight.w900,
       ),
     );
   }

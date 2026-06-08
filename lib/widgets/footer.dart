@@ -7,7 +7,7 @@ class PortfolioFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isMobile = MediaQuery.sizeOf(context).width < 800;
+    final isMobile = MediaQuery.sizeOf(context).width < 820;
 
     return Container(
       width: double.infinity,
@@ -17,8 +17,10 @@ class PortfolioFooter extends StatelessWidget {
             : AppTheme.desktopHorizontalPadding,
         vertical: 32,
       ),
-      decoration: const BoxDecoration(
-        border: Border(top: BorderSide(color: AppTheme.border)),
+      decoration: BoxDecoration(
+        border: Border(
+          top: BorderSide(color: AppTheme.border.withValues(alpha: 0.72)),
+        ),
       ),
       child: Center(
         child: ConstrainedBox(
@@ -28,7 +30,7 @@ class PortfolioFooter extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     _FooterBrand(),
-                    SizedBox(height: 12),
+                    SizedBox(height: 10),
                     _FooterText(),
                   ],
                 )
@@ -64,7 +66,7 @@ class _FooterText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      'Built with Flutter Web • ${DateTime.now().year}',
+      'Built with Flutter Web - ${DateTime.now().year}',
       style: const TextStyle(
         color: AppTheme.textMuted,
         fontSize: 14,

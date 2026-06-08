@@ -8,7 +8,7 @@ class ContactSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isMobile = MediaQuery.sizeOf(context).width < 800;
+    final isMobile = MediaQuery.sizeOf(context).width < 820;
 
     return Container(
       width: double.infinity,
@@ -25,57 +25,34 @@ class ContactSection extends StatelessWidget {
             width: double.infinity,
             padding: EdgeInsets.all(isMobile ? 28 : 44),
             decoration: BoxDecoration(
-              color: AppTheme.surface,
-              borderRadius: BorderRadius.circular(36),
+              color: AppTheme.surface.withValues(alpha: 0.94),
+              borderRadius: BorderRadius.circular(AppTheme.cardRadius),
               border: Border.all(color: AppTheme.border),
               boxShadow: [
                 BoxShadow(
-                  color: AppTheme.primary.withValues(alpha: 0.08),
-                  blurRadius: 60,
+                  color: Colors.black.withValues(alpha: 0.24),
+                  blurRadius: 44,
                   offset: const Offset(0, 28),
                 ),
               ],
             ),
-            child: Stack(
-              children: [
-                Positioned(
-                  top: -120,
-                  right: -120,
-                  child: Container(
-                    width: 280,
-                    height: 280,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppTheme.primary.withValues(alpha: 0.08),
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppTheme.primary.withValues(alpha: 0.22),
-                          blurRadius: 120,
-                          spreadRadius: 24,
-                        ),
-                      ],
-                    ),
+            child: isMobile
+                ? const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _ContactCopy(),
+                      SizedBox(height: 32),
+                      _ContactLinks(),
+                    ],
+                  )
+                : const Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(flex: 6, child: _ContactCopy()),
+                      SizedBox(width: 56),
+                      Expanded(flex: 4, child: _ContactLinks()),
+                    ],
                   ),
-                ),
-                isMobile
-                    ? const Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _ContactCopy(),
-                          SizedBox(height: 32),
-                          _ContactLinks(),
-                        ],
-                      )
-                    : const Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(flex: 6, child: _ContactCopy()),
-                          SizedBox(width: 56),
-                          Expanded(flex: 4, child: _ContactLinks()),
-                        ],
-                      ),
-              ],
-            ),
           ),
         ),
       ),
@@ -88,32 +65,25 @@ class _ContactCopy extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = MediaQuery.sizeOf(context).width < 520;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'CONTACT',
-          style: TextStyle(
-            color: AppTheme.primary,
-            fontSize: 14,
-            fontWeight: FontWeight.w900,
-            letterSpacing: 1.4,
-          ),
-        ),
+        const _SectionEyebrow(text: 'CONTACT'),
         const SizedBox(height: 16),
-        const Text(
-          'Have a role, idea,\nor problem worth solving?',
+        Text(
+          'Let us build something useful.',
           style: TextStyle(
             color: AppTheme.textPrimary,
-            fontSize: 44,
+            fontSize: isMobile ? 36 : 48,
             height: 1.05,
             fontWeight: FontWeight.w900,
-            letterSpacing: -1.2,
           ),
         ),
         const SizedBox(height: 22),
         const Text(
-          'I’m open to product-focused tech roles, Flutter projects, and teams that care about building useful software.',
+          'I am open to product-focused tech roles, Flutter projects, and teams that care about shipping software people actually use.',
           style: TextStyle(
             color: AppTheme.textSecondary,
             fontSize: 18,
@@ -122,10 +92,10 @@ class _ContactCopy extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 30),
-        Wrap(
-          spacing: 12,
-          runSpacing: 12,
-          children: const [
+        const Wrap(
+          spacing: 10,
+          runSpacing: 10,
+          children: [
             _AvailabilityPill(text: 'Flutter'),
             _AvailabilityPill(text: 'Product Thinking'),
             _AvailabilityPill(text: 'Operations'),
@@ -145,10 +115,10 @@ class _AvailabilityPill extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 9),
       decoration: BoxDecoration(
         color: AppTheme.background,
-        borderRadius: BorderRadius.circular(999),
+        borderRadius: BorderRadius.circular(AppTheme.cardRadius),
         border: Border.all(color: AppTheme.border),
       ),
       child: Text(
@@ -215,16 +185,16 @@ class _ContactLinkCard extends StatelessWidget {
       cursor: SystemMouseCursors.click,
       child: Material(
         color: AppTheme.background,
-        borderRadius: BorderRadius.circular(22),
+        borderRadius: BorderRadius.circular(AppTheme.cardRadius),
         child: InkWell(
           onTap: onTap,
-          borderRadius: BorderRadius.circular(22),
+          borderRadius: BorderRadius.circular(AppTheme.cardRadius),
           hoverColor: AppTheme.primary.withValues(alpha: 0.08),
           child: Container(
             width: double.infinity,
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(18),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(22),
+              borderRadius: BorderRadius.circular(AppTheme.cardRadius),
               border: Border.all(color: AppTheme.border),
             ),
             child: Row(
@@ -234,14 +204,14 @@ class _ContactLinkCard extends StatelessWidget {
                   height: 44,
                   decoration: BoxDecoration(
                     color: AppTheme.primary.withValues(alpha: 0.10),
-                    borderRadius: BorderRadius.circular(14),
+                    borderRadius: BorderRadius.circular(AppTheme.cardRadius),
                     border: Border.all(
                       color: AppTheme.primary.withValues(alpha: 0.22),
                     ),
                   ),
                   child: Icon(icon, color: AppTheme.primary, size: 21),
                 ),
-                const SizedBox(width: 16),
+                const SizedBox(width: 14),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -257,16 +227,19 @@ class _ContactLinkCard extends StatelessWidget {
                       const SizedBox(height: 5),
                       Text(
                         value,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
                           color: AppTheme.textPrimary,
                           fontSize: 15,
-                          height: 1.4,
+                          height: 1.35,
                           fontWeight: FontWeight.w800,
                         ),
                       ),
                     ],
                   ),
                 ),
+                const SizedBox(width: 10),
                 const Icon(
                   Icons.arrow_outward,
                   color: AppTheme.primary,
@@ -276,6 +249,24 @@ class _ContactLinkCard extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _SectionEyebrow extends StatelessWidget {
+  final String text;
+
+  const _SectionEyebrow({required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: const TextStyle(
+        color: AppTheme.primary,
+        fontSize: 13,
+        fontWeight: FontWeight.w900,
       ),
     );
   }

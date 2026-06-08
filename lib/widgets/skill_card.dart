@@ -12,76 +12,71 @@ class SkillCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 118,
-      height: 128,
+      width: 164,
+      height: 116,
       decoration: BoxDecoration(
-        color: AppTheme.surface.withValues(alpha: 0.72),
-        borderRadius: BorderRadius.circular(22),
+        color: AppTheme.surface.withValues(alpha: 0.86),
+        borderRadius: BorderRadius.circular(AppTheme.cardRadius),
         border: Border.all(color: AppTheme.border.withValues(alpha: 0.9)),
         boxShadow: [
           BoxShadow(
-            color: AppTheme.primary.withValues(alpha: 0.05),
-            blurRadius: 24,
+            color: Colors.black.withValues(alpha: 0.18),
+            blurRadius: 20,
             offset: const Offset(0, 12),
           ),
         ],
       ),
-      child: Stack(
-        children: [
-          Positioned(
-            top: -28,
-            right: -28,
-            child: Container(
-              width: 72,
-              height: 72,
+      child: Padding(
+        padding: const EdgeInsets.all(14),
+        child: Row(
+          children: [
+            Container(
+              width: 42,
+              height: 42,
+              padding: const EdgeInsets.all(7),
               decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: AppTheme.primary.withValues(alpha: 0.08),
-                boxShadow: [
-                  BoxShadow(
-                    color: AppTheme.primary.withValues(alpha: 0.18),
-                    blurRadius: 40,
-                    spreadRadius: 4,
+                color: AppTheme.background,
+                borderRadius: BorderRadius.circular(AppTheme.cardRadius),
+                border: Border.all(color: AppTheme.border),
+              ),
+              child: SvgPicture.network(
+                skill.iconUrl,
+                placeholderBuilder: (_) => const SizedBox.shrink(),
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    skill.name,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      color: AppTheme.textPrimary,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  Text(
+                    skill.category,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      color: AppTheme.textMuted,
+                      fontSize: 11,
+                      height: 1.25,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ],
               ),
             ),
-          ),
-          Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SvgPicture.network(
-                  skill.iconUrl,
-                  width: 38,
-                  height: 38,
-                  placeholderBuilder: (_) =>
-                      const SizedBox(width: 38, height: 38),
-                ),
-                const SizedBox(height: 14),
-                Text(
-                  skill.name,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: AppTheme.textPrimary,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  skill.category,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: AppTheme.textMuted,
-                    fontSize: 11,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
