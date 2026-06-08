@@ -2,39 +2,35 @@ import '../models/experience.dart';
 
 const experiences = [
   Experience(
-    title: 'Flutter Developer / Product Builder',
-    organization: 'Jareb',
-    period: '2026 - Present',
-    description:
-        'Building a reward-based discovery product for cafés and restaurants in Bahrain.',
-    highlights: [
-      'Designed product flows around drops, claims, merchants, and customer rewards',
-      'Worked with Supabase, Cloudflare, and Flutter-focused product planning',
-      'Built around real business validation instead of only UI mockups',
-    ],
-  ),
-  Experience(
-    title: 'Founder / Flutter Developer',
-    organization: 'Academity',
-    period: '2024 - 2025',
-    description:
-        'Built an academy operations and subscription payment concept for recurring customer management.',
-    highlights: [
-      'Worked on payment collection workflows and academy operations',
-      'Explored Tap Payments and WhatsApp automation integrations',
-      'Learned how to connect product requirements with technical execution',
-    ],
-  ),
-  Experience(
-    title: 'Software Engineering Learner',
+    year: '2024',
+    title: 'Software foundations',
     organization: 'Reboot01 Bahrain',
-    period: '2024 - Present',
     description:
-        'Completing project-based software engineering training focused on real implementation.',
-    highlights: [
-      'Built projects using Go, JavaScript, SQLite, WebSockets, and frontend frameworks',
-      'Worked on authentication, real-time communication, routing, state, and database logic',
-      'Developed debugging habits through hands-on project requirements',
-    ],
+        'Built project-based fundamentals using Go, JavaScript, SQLite, WebSockets, routing, state, and backend logic.',
+    tags: ['Go', 'JavaScript', 'SQLite', 'WebSockets'],
+  ),
+  Experience(
+    year: '2025',
+    title: 'Full-stack systems',
+    organization: 'Reboot01 Projects',
+    description:
+        'Worked on real app behavior: auth, privacy, posts, follows, notifications, messaging, and database flows.',
+    tags: ['Auth', 'Privacy', 'Messaging', 'Database'],
+  ),
+  Experience(
+    year: '2025',
+    title: 'Operations to product',
+    organization: 'Academity',
+    description:
+        'Turned academy payment and reminder problems into product workflows, automation ideas, and subscription logic.',
+    tags: ['Payments', 'Reminders', 'Automation'],
+  ),
+  Experience(
+    year: '2026',
+    title: 'Product validation',
+    organization: 'Jareb',
+    description:
+        'Shaped a Bahrain/GCC reward discovery product around merchants, users, verified visits, and validation.',
+    tags: ['F&B', 'Rewards', 'Validation', 'GCC'],
   ),
 ];
