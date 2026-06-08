@@ -23,25 +23,44 @@ class PortfolioNavBar extends StatelessWidget {
     final isMobile = MediaQuery.sizeOf(context).width < 800;
 
     return Positioned(
-      top: 24,
+      top: 0,
       left: 0,
       right: 0,
-      child: Center(
-        child: isMobile
-            ? _MobileNavButton(
-                onHeroTap: onHeroTap,
-                onAboutTap: onAboutTap,
-                onTechTap: onTechTap,
-                onProjectsTap: onProjectsTap,
-                onContactTap: onContactTap,
-              )
-            : _DesktopNavBar(
-                onHeroTap: onHeroTap,
-                onAboutTap: onAboutTap,
-                onTechTap: onTechTap,
-                onProjectsTap: onProjectsTap,
-                onContactTap: onContactTap,
-              ),
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: isMobile
+              ? AppTheme.mobileHorizontalPadding
+              : AppTheme.desktopHorizontalPadding,
+          vertical: 18,
+        ),
+        decoration: BoxDecoration(
+          color: AppTheme.background.withValues(alpha: 0.72),
+          border: Border(
+            bottom: BorderSide(color: AppTheme.border.withValues(alpha: 0.45)),
+          ),
+        ),
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(
+              maxWidth: AppTheme.maxContentWidth,
+            ),
+            child: isMobile
+                ? _MobileNavButton(
+                    onHeroTap: onHeroTap,
+                    onAboutTap: onAboutTap,
+                    onTechTap: onTechTap,
+                    onProjectsTap: onProjectsTap,
+                    onContactTap: onContactTap,
+                  )
+                : _DesktopNavBar(
+                    onHeroTap: onHeroTap,
+                    onAboutTap: onAboutTap,
+                    onTechTap: onTechTap,
+                    onProjectsTap: onProjectsTap,
+                    onContactTap: onContactTap,
+                  ),
+          ),
+        ),
       ),
     );
   }
@@ -64,29 +83,39 @@ class _DesktopNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-      decoration: BoxDecoration(
-        color: AppTheme.background.withValues(alpha: 0.88),
-        borderRadius: BorderRadius.circular(999),
-        border: Border.all(color: AppTheme.border),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.18),
-            blurRadius: 24,
-            offset: const Offset(0, 12),
+    return Row(
+      children: [
+        MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: GestureDetector(
+            onTap: onHeroTap,
+            child: const Text(
+              'Mahmood Sharif',
+              style: TextStyle(
+                color: AppTheme.textPrimary,
+                fontSize: 16,
+                fontWeight: FontWeight.w900,
+                letterSpacing: -0.2,
+              ),
+            ),
           ),
-        ],
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _NavItem(label: 'Home', onTap: onHeroTap),
-          _NavItem(label: 'Work', onTap: onAboutTap),
-          _NavItem(label: 'Stack', onTap: onTechTap),
-          _NavItem(label: 'Contact', onTap: onContactTap),
-        ],
-      ),
+        ),
+        const SizedBox(width: 10),
+        const Text(
+          'Product-minded Developer',
+          style: TextStyle(
+            color: AppTheme.textMuted,
+            fontSize: 14,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        const Spacer(),
+        _NavItem(label: 'Home', onTap: onHeroTap),
+        _NavItem(label: 'Work', onTap: onAboutTap),
+        _NavItem(label: 'Experience', onTap: onProjectsTap),
+        _NavItem(label: 'Stack', onTap: onTechTap),
+        _NavItem(label: 'Contact', onTap: onContactTap),
+      ],
     );
   }
 }
@@ -135,17 +164,17 @@ class _MobileNavButton extends StatelessWidget {
                   },
                 ),
                 _MobileNavItem(
+                  label: 'Experience',
+                  onTap: () {
+                    Navigator.pop(context);
+                    onProjectsTap();
+                  },
+                ),
+                _MobileNavItem(
                   label: 'Stack',
                   onTap: () {
                     Navigator.pop(context);
                     onTechTap();
-                  },
-                ),
-                _MobileNavItem(
-                  label: 'Projects',
-                  onTap: () {
-                    Navigator.pop(context);
-                    onProjectsTap();
                   },
                 ),
                 _MobileNavItem(
@@ -165,18 +194,25 @@ class _MobileNavButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.topRight,
-      child: Padding(
-        padding: const EdgeInsets.only(right: 20),
-        child: Material(
-          color: AppTheme.background.withValues(alpha: 0.88),
+    return Row(
+      children: [
+        const Text(
+          'Mahmood Sharif',
+          style: TextStyle(
+            color: AppTheme.textPrimary,
+            fontSize: 16,
+            fontWeight: FontWeight.w900,
+          ),
+        ),
+        const Spacer(),
+        Material(
+          color: AppTheme.surface,
           borderRadius: BorderRadius.circular(999),
           child: InkWell(
             onTap: () => _openMenu(context),
             borderRadius: BorderRadius.circular(999),
             child: Container(
-              padding: const EdgeInsets.all(14),
+              padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(999),
                 border: Border.all(color: AppTheme.border),
@@ -185,7 +221,7 @@ class _MobileNavButton extends StatelessWidget {
             ),
           ),
         ),
-      ),
+      ],
     );
   }
 }
@@ -200,13 +236,11 @@ class _NavItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: onTap,
-      child: Text(
-        label,
-        style: const TextStyle(
-          color: AppTheme.textPrimary,
-          fontWeight: FontWeight.w700,
-        ),
+      style: TextButton.styleFrom(
+        foregroundColor: AppTheme.textPrimary,
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       ),
+      child: Text(label, style: const TextStyle(fontWeight: FontWeight.w800)),
     );
   }
 }

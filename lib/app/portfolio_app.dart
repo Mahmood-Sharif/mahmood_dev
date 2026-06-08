@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 
-import '../sections/selected_work_section.dart';
 import '../sections/contact_section.dart';
-import '../sections/hero_section.dart';
-import '../sections/projects_section.dart';
-import '../sections/tech_stack_section.dart';
 import '../sections/experience_section.dart';
-import '../widgets/footer.dart';
-import '../widgets/page_background.dart';
+import '../sections/hero_section.dart';
+import '../sections/selected_work_section.dart';
+import '../sections/tech_stack_section.dart';
 import '../utils/link_launcher.dart';
+import '../widgets/footer.dart';
 import '../widgets/nav_bar.dart';
+import '../widgets/page_background.dart';
 import 'app_theme.dart';
 
 class PortfolioApp extends StatelessWidget {
@@ -18,7 +17,7 @@ class PortfolioApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Mahmood Sharif | Flutter Developer',
+      title: 'Mahmood Sharif | Product-minded Developer',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme(),
       home: const PortfolioHomePage(),
@@ -34,10 +33,10 @@ class PortfolioHomePage extends StatefulWidget {
 }
 
 class _PortfolioHomePageState extends State<PortfolioHomePage> {
-  final heroKey = GlobalKey();
-  final aboutKey = GlobalKey();
-  final techKey = GlobalKey();
-  final projectsKey = GlobalKey();
+  final homeKey = GlobalKey();
+  final workKey = GlobalKey();
+  final experienceKey = GlobalKey();
+  final stackKey = GlobalKey();
   final contactKey = GlobalKey();
 
   void scrollToSection(GlobalKey key) {
@@ -62,30 +61,30 @@ class _PortfolioHomePageState extends State<PortfolioHomePage> {
                 child: Column(
                   children: [
                     Container(
-                      key: heroKey,
+                      key: homeKey,
                       child: HeroSection(
-                        onViewProjectsTap: () => scrollToSection(projectsKey),
-                        onDownloadCvTap: () =>
-                            launchAsset('documents/mahmood_sharif_cv.pdf'),
+                        onViewProjectsTap: () => scrollToSection(workKey),
+                        onDownloadCvTap: () => launchWebDocument(
+                          'documents/mahmood_sharif_cv.pdf',
+                        ),
                       ),
                     ),
+                    Container(key: workKey, child: const SelectedWorkSection()),
                     Container(
-                      key: aboutKey,
-                      child: const SelectedWorkSection(),
+                      key: experienceKey,
+                      child: const ExperienceSection(),
                     ),
-                    const ExperienceSection(),
-                    Container(key: techKey, child: const TechStackSection()),
-                    Container(key: projectsKey, child: const ProjectsSection()),
+                    Container(key: stackKey, child: const TechStackSection()),
                     Container(key: contactKey, child: const ContactSection()),
                     const PortfolioFooter(),
                   ],
                 ),
               ),
               PortfolioNavBar(
-                onHeroTap: () => scrollToSection(heroKey),
-                onAboutTap: () => scrollToSection(aboutKey),
-                onTechTap: () => scrollToSection(techKey),
-                onProjectsTap: () => scrollToSection(projectsKey),
+                onHeroTap: () => scrollToSection(homeKey),
+                onAboutTap: () => scrollToSection(workKey),
+                onProjectsTap: () => scrollToSection(experienceKey),
+                onTechTap: () => scrollToSection(stackKey),
                 onContactTap: () => scrollToSection(contactKey),
               ),
             ],
