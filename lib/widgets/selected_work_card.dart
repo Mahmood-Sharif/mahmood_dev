@@ -160,6 +160,8 @@ class _WorkVisual extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final hasImage = work.imagePath != null;
+
     return AspectRatio(
       aspectRatio: 1,
       child: Container(
@@ -167,67 +169,99 @@ class _WorkVisual extends StatelessWidget {
           color: AppTheme.background,
           borderRadius: BorderRadius.circular(28),
           border: Border.all(color: AppTheme.border),
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              AppTheme.primary.withValues(alpha: 0.20),
-              AppTheme.surface,
-              AppTheme.background,
-            ],
-          ),
-        ),
-        child: Stack(
-          children: [
-            Positioned(
-              top: 24,
-              left: 24,
-              right: 24,
-              child: Text(
-                work.visualLabel,
-                style: const TextStyle(
-                  color: AppTheme.primary,
-                  fontSize: 13,
-                  height: 1.4,
-                  fontWeight: FontWeight.w900,
-                  letterSpacing: 1.2,
+          gradient: hasImage
+              ? null
+              : LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    AppTheme.primary.withValues(alpha: 0.20),
+                    AppTheme.surface,
+                    AppTheme.background,
+                  ],
                 ),
-              ),
-            ),
-            Center(
-              child: Container(
-                width: 124,
-                height: 124,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppTheme.primary.withValues(alpha: 0.14),
-                  border: Border.all(
-                    color: AppTheme.primary.withValues(alpha: 0.35),
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(28),
+          child: Stack(
+            children: [
+              if (hasImage)
+                Positioned.fill(
+                  child: Image.asset(
+                    work.imagePath!,
+                    fit: BoxFit.cover,
+                    alignment: Alignment.topCenter,
+                  ),
+                )
+              else
+                Center(
+                  child: Container(
+                    width: 124,
+                    height: 124,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppTheme.primary.withValues(alpha: 0.14),
+                      border: Border.all(
+                        color: AppTheme.primary.withValues(alpha: 0.35),
+                      ),
+                    ),
+                    child: Icon(
+                      _iconForWork(work.title),
+                      color: AppTheme.primary,
+                      size: 54,
+                    ),
                   ),
                 ),
-                child: Icon(
-                  _iconForWork(work.title),
-                  color: AppTheme.primary,
-                  size: 54,
+
+              // dark overlay so text stays readable
+              Positioned.fill(
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Colors.black.withValues(alpha: hasImage ? 0.18 : 0),
+                        Colors.black.withValues(alpha: hasImage ? 0.55 : 0),
+                      ],
+                    ),
+                  ),
                 ),
               ),
-            ),
-            Positioned(
-              left: 24,
-              right: 24,
-              bottom: 24,
-              child: Text(
-                work.title,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: AppTheme.textPrimary,
-                  fontSize: 28,
-                  fontWeight: FontWeight.w900,
-                  letterSpacing: -0.6,
+
+              Positioned(
+                top: 22,
+                left: 22,
+                right: 22,
+                child: Text(
+                  work.visualLabel,
+                  style: const TextStyle(
+                    color: AppTheme.primary,
+                    fontSize: 13,
+                    height: 1.4,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 1.2,
+                  ),
                 ),
               ),
-            ),
-          ],
+
+              Positioned(
+                left: 22,
+                right: 22,
+                bottom: 22,
+                child: Text(
+                  work.title,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: AppTheme.textPrimary,
+                    fontSize: 28,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: -0.6,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

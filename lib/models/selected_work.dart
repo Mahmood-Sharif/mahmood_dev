@@ -8,6 +8,7 @@ class SelectedWork {
   final String visualLabel;
   final String ctaLabel;
   final String? url;
+  final String? imagePath;
 
   const SelectedWork({
     required this.number,
@@ -19,5 +20,6 @@ class SelectedWork {
     required this.visualLabel,
     required this.ctaLabel,
     this.url,
+    this.imagePath,
   });
 }

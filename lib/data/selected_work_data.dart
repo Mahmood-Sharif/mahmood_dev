@@ -11,6 +11,7 @@ const selectedWorks = [
     visualLabel: 'DISCOVER · VISIT · CLAIM',
     ctaLabel: 'Visit live site',
     url: 'https://jareb.app',
+    imagePath: 'assets/images/work/jareb.png',
   ),
   SelectedWork(
     number: '02',
@@ -21,6 +22,7 @@ const selectedWorks = [
     tools: ['Flutter', 'APIs', 'Payments', 'WhatsApp'],
     visualLabel: 'REGISTER · REMIND · COLLECT',
     ctaLabel: 'View case study',
+    imagePath: 'assets/images/work/academity.png',
   ),
   SelectedWork(
     number: '03',
@@ -32,5 +34,6 @@ const selectedWorks = [
     tools: ['Go', 'SQLite', 'WebSockets', 'React'],
     visualLabel: 'AUTH · POSTS · REAL-TIME',
     ctaLabel: 'View details',
+    imagePath: 'assets/images/work/social_network.png',
   ),
 ];
